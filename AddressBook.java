@@ -21,13 +21,13 @@ public class AddressBook {
 	List<PersonInfo> personList = new ArrayList<>();
 	private static Scanner scanner = new Scanner(System.in);
 
-	
 	/**
-	 * created object of AddressBook class and called methods using switch case for adding,
-	 * editing, deleting and showing contacts. 
+	 * created object of AddressBook class and called methods using switch case for
+	 * adding, editing, deleting and showing contacts.
+	 * 
 	 * @param args
 	 */
-	
+
 	public static void main(String[] args) {
 
 		System.out.println("Welcome to address book system");
@@ -59,12 +59,12 @@ public class AddressBook {
 			}
 		}
 	}
-	
+
 	/**
-	 * UC-2 to add new person info to address book 
+	 * UC-2 to add new person info to address book
 	 * 
 	 */
-	
+
 	private void addPerson() {
 
 		PersonInfo person = new PersonInfo();
@@ -95,4 +95,63 @@ public class AddressBook {
 
 	}
 
+	/**
+     * UC-3 To edit contact getting person name and comparing with arraylist,
+     * if it is equal then user will able to edit details for that person  
+     * 
+     */
+    
+    public void editUser() {
+    	
+        System.out.println("Enter the Phone No.");
+        String personName = scanner.next();
+        for (int i = 0; i < personList.size(); i++) {
+            if (personList.get(i).getFirstName().equals(personName) ) {
+                PersonInfo temp = personList.get(i);
+                do {
+                    System.out.println("1: edit Phone Number : ");
+                    System.out.println("2: edit Address : ");
+                    System.out.println("3: edit City : ");
+                    System.out.println("4: edit ZipCode : ");
+                    System.out.println("5: edit State : ");
+                    System.out.println("6: edit Email : ");
+
+                    int choice = scanner.nextInt();
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Enter the new Number");
+                            temp.setPhoneNumber(scanner.nextLong());
+                            break;
+                        case 2:
+                            System.out.println("Enter the new Address");
+                            temp.setAddress(scanner.next());
+                            break;
+                        case 3:
+                            System.out.println("Enter the new city");
+                            temp.setCity(scanner.next());
+                            break;
+                        case 4:
+                            System.out.println("Enter the new ZipCode");
+                            temp.setZipcode(scanner.nextInt());
+                            break;
+                        case 5:
+                            System.out.println("Enter the new State");
+                            temp.setState(scanner.next());
+                            break;
+                        case 6:
+                            System.out.println("Enter the new Email");
+                            temp.setEmail(scanner.next());
+                            break;
+                        default:
+                            System.out.println("Enter the correct Input");
+
+                    }
+                    System.out.println("If you want to edit more thing than enter true");
+                } while (scanner.nextBoolean());
+            } 
+        } 
+
+    }
+    
 }
