@@ -103,7 +103,7 @@ public class AddressBook {
     
     public void editUser() {
     	
-        System.out.println("Enter the Phone No.");
+        System.out.println("Enter the First name");
         String personName = scanner.next();
         for (int i = 0; i < personList.size(); i++) {
             if (personList.get(i).getFirstName().equals(personName) ) {
@@ -147,11 +147,44 @@ public class AddressBook {
                             System.out.println("Enter the correct Input");
 
                     }
-                    System.out.println("If you want to edit more thing than enter true");
                 } while (scanner.nextBoolean());
             } 
-        } 
+        } // end of for loop
 
+    }
+    
+    
+    /**
+     * 
+     * UC-4 In this method user should enter first name and last name which is 
+     * compared with personlist if they are equal user will be able to delete 
+     * 1data for that person.
+     * 
+     */
+    
+    public boolean deleteUser() {
+
+        System.out.println("Enter the First Name");
+        String firstName = scanner.next();
+        System.out.println("Enter the Last Name");
+        String lastName = scanner.next();
+
+        for (int i = 0; i < personList.size(); i++) {
+            if (personList.get(i).getFirstName().equals(firstName) && personList.get(i).getLastName().equals(lastName)) {
+                personList.remove(i);
+                System.out.println("user has been Deleted");
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /*
+   	*	To show user details from the person list.
+    */
+
+    private void showContacts() {
+        System.out.println(personList);
     }
     
 }
