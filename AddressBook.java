@@ -1,4 +1,3 @@
-
 /**
  * 
  * @author Sanobar Mujawar
@@ -7,184 +6,105 @@
  * Purpose: Address book system to manage person data and can 
  * add, edit, delete person details.
  * 
- * 
  */
 
 package com.bridgelabz.JavaPractice;
 
-import com.bridgelabz.JavaPractice.model.PersonInfo;
-import java.util.*;
-import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class AddressBook {
 
-	List<PersonInfo> personList = new ArrayList<>();
-	private static Scanner scanner = new Scanner(System.in);
+	private Person person;
+	private int recordId;
+	private static int recordCounter = 100;
 
-	/**
-	 * created object of AddressBook class and called methods using switch case for
-	 * adding, editing, deleting and showing contacts.
-	 * 
-	 * @param args
-	 */
+	public static String userInputValidation(String pattern, String inputTitle) {
+		
+		Scanner nameSc = new Scanner(System.in);
+		String userInput;
+		while (true) {
+			System.out.print("Enter " + inputTitle + ": ");
+			userInput = nameSc.nextLine();
+			if (Pattern.matches(pattern, String.valueOf(userInput))) {
+				break;
+			}
 
-	public static void main(String[] args) {
-
-		System.out.println("Welcome to address book system");
-		AddressBook addressbook = new AddressBook();
-
-		boolean isExit = false;
-		while (!isExit) {
-
-			System.out.println("Enter options\n1.Add\n2.Edit\n3.Delete\n4.Show contacts\n5.Exit");
-			int userInput = scanner.nextInt();
-			switch (userInput) {
-			case 1:
-				addressbook.addPerson();
-				break;
-			case 2:
-				addressbook.editUser();
-				break;
-			case 3:
-				addressbook.deleteUser();
-				break;
-			case 4:
-				addressbook.showContacts();
-				break;
-			case 5:
-				isExit = true;
-				break;
-			default:
-				System.out.println("Please enter valid input");
+			else if (inputTitle.equals("Phone Number") || inputTitle.equals("ZIP")) {
+				System.out.println("Opps!" + " Invalid " + inputTitle);
+			} else {
+				System.out.println("Opps! " + inputTitle + " should start with Capital letter and"
+						+ " should not contain any space!");
 			}
 		}
+		return userInput;
 	}
 
+	public void addPerson() {
+		String pattern = "^[A-Z][a-zA-Z]+$";
+		String firstName = AddressBook.userInputValidation(pattern, "First Name");
+		String lastName = AddressBook.userInputValidation(pattern, "Last Name");
+
+		Person personObj = new Person(firstName, lastName);
+		this.person = personObj;
+	}
+
+	public void updatePersonName(Person personObj) {
+
+		String pattern = "^[A-Z][a-zA-Z]+$";
+		String firstName = AddressBook.userInputValidation(pattern, "First Name");
+		String lastName = AddressBook.userInputValidation(pattern, "Last Name");
+		personObj.setName(firstName, lastName);
+	}
+
+	public Person getPerson() {
+		return this.person;
+	}
+
+	public int getRecordId() {
+		return this.recordId;
+	}
+
+	public void addPhoneNumber(Person personObj) {
+		String pattern = "^(\\+91|91|0)?([6-9]{1}[0-9]{9})$";
+		String phoneNumber = AddressBook.userInputValidation(pattern, "Phone Number");
+		personObj.setPhoneNumber(phoneNumber);
+	}
+
+	public void addAddress(Person personObj) {
+		String pattern = "^[A-Z][a-zA-Z]+$";
+		String zipPattern = "^[1-9]{1}[0-9]{2}(-| |)[0-9]{3}$";
+		String address = AddressBook.userInputValidation(pattern, "Address");
+		String city = AddressBook.userInputValidation(pattern, "City");
+		String state = AddressBook.userInputValidation(pattern, "State");
+		String zip = AddressBook.userInputValidation(zipPattern, "ZIP");
+
+		Address addressObj = new Address(address, city, state, zip);
+		personObj.setAddress(addressObj);
+	}
+	
 	/**
-	 * UC-2 to add new person info to address book
+	 * UC-5 to add multiple users to Address book
 	 * 
+	 * @param inputResponse
+	 * @return
 	 */
 
-	private void addPerson() {
+	public AddressBook addRecord(Scanner inputResponse) {
 
-		PersonInfo person = new PersonInfo();
-		System.out.println("Enter First Name: ");
-		person.setFirstName(scanner.next());
+		this.addPerson();
+		this.recordId = AddressBook.recordCounter;
+		AddressBook.recordCounter++;
 
-		System.out.println("Enter Last Name : ");
-		person.setLastName(scanner.next());
+		System.out.print("Want to skip for now? y/n : ");
+		String skipStatus = inputResponse.next();
 
-		System.out.println("Enter the Address : ");
-		person.setAddress(scanner.next());
-
-		System.out.println("Enter the City : ");
-		person.setCity(scanner.next());
-
-		System.out.println("Enter the State : ");
-		person.setState(scanner.next());
-
-		System.out.println("Enter Email : ");
-		person.setEmail(scanner.next());
-
-		System.out.println("Enter ZipCode : ");
-		person.setZipcode(scanner.nextInt());
-
-		System.out.println("Enter Phone Number: ");
-		person.setPhoneNumber(scanner.nextLong());
-		personList.add(person);
+		if (skipStatus.equals("n")) {
+			Person personObj = this.getPerson();
+			this.addPhoneNumber(personObj);
+			this.addAddress(personObj);
+		}
+		return this;
 
 	}
-
-	/**
-     * UC-3 To edit contact getting person name and comparing with arraylist,
-     * if it is equal then user will able to edit details for that person  
-     * 
-     */
-    
-    public void editUser() {
-    	
-        System.out.println("Enter the First name");
-        String personName = scanner.next();
-        for (int i = 0; i < personList.size(); i++) {
-            if (personList.get(i).getFirstName().equals(personName) ) {
-                PersonInfo temp = personList.get(i);
-                do {
-                    System.out.println("1: edit Phone Number : ");
-                    System.out.println("2: edit Address : ");
-                    System.out.println("3: edit City : ");
-                    System.out.println("4: edit ZipCode : ");
-                    System.out.println("5: edit State : ");
-                    System.out.println("6: edit Email : ");
-
-                    int choice = scanner.nextInt();
-
-                    switch (choice) {
-                        case 1:
-                            System.out.println("Enter the new Number");
-                            temp.setPhoneNumber(scanner.nextLong());
-                            break;
-                        case 2:
-                            System.out.println("Enter the new Address");
-                            temp.setAddress(scanner.next());
-                            break;
-                        case 3:
-                            System.out.println("Enter the new city");
-                            temp.setCity(scanner.next());
-                            break;
-                        case 4:
-                            System.out.println("Enter the new ZipCode");
-                            temp.setZipcode(scanner.nextInt());
-                            break;
-                        case 5:
-                            System.out.println("Enter the new State");
-                            temp.setState(scanner.next());
-                            break;
-                        case 6:
-                            System.out.println("Enter the new Email");
-                            temp.setEmail(scanner.next());
-                            break;
-                        default:
-                            System.out.println("Enter the correct Input");
-
-                    }
-                } while (scanner.nextBoolean());
-            } 
-        } // end of for loop
-
-    }
-    
-    
-    /**
-     * 
-     * UC-4 In this method user should enter first name and last name which is 
-     * compared with personlist if they are equal user will be able to delete 
-     * 1data for that person.
-     * 
-     */
-    
-    public boolean deleteUser() {
-
-        System.out.println("Enter the First Name");
-        String firstName = scanner.next();
-        System.out.println("Enter the Last Name");
-        String lastName = scanner.next();
-
-        for (int i = 0; i < personList.size(); i++) {
-            if (personList.get(i).getFirstName().equals(firstName) && personList.get(i).getLastName().equals(lastName)) {
-                personList.remove(i);
-                System.out.println("user has been Deleted");
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    /*
-   	*	To show user details from the person list.
-    */
-
-    private void showContacts() {
-        System.out.println(personList);
-    }
-    
 }
