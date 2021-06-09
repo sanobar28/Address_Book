@@ -1,7 +1,7 @@
 
 /**
  * 
- * UC-1 This is PersonInfo class model for address book here getter and setter is
+ * UC-1 This is Person class for address book here getter and setter is
  *  used to get and set the value of a address book user.
  * 
  * 

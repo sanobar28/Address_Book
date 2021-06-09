@@ -1,5 +1,11 @@
 package com.bridgelabz.JavaPractice;
 
+/**
+ * 
+ * Address class to get address from user 
+ *
+ */
+
 public class Address {
 
 	private String address, city, state, zip;

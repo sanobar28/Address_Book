@@ -19,6 +19,12 @@ public class AddressBook {
 	private int recordId;
 	private static int recordCounter = 100;
 
+	/**
+	 * Method to validate user input 
+	 * @param pattern
+	 * @param inputTitle
+	 * @return
+	 */
 	public static String userInputValidation(String pattern, String inputTitle) {
 		
 		Scanner nameSc = new Scanner(System.in);
@@ -39,11 +45,17 @@ public class AddressBook {
 		}
 		return userInput;
 	}
+	
+	/**
+	 * Methods to add or update person data (first name, last name, phone no., address )
+	 * 
+	 */
 
 	public void addPerson() {
+	
 		String pattern = "^[A-Z][a-zA-Z]+$";
-		String firstName = AddressBook.userInputValidation(pattern, "First Name");
-		String lastName = AddressBook.userInputValidation(pattern, "Last Name");
+		String firstName= AddressBook.userInputValidation(pattern, "First Name");;
+		String lastName= AddressBook.userInputValidation(pattern, "Last Name");
 
 		Person personObj = new Person(firstName, lastName);
 		this.person = personObj;
