@@ -11,46 +11,100 @@ package com.bridgelabz.JavaPractice;
 
 public class Person {
 
-	private String firstName, lastName, phoneNumber;
-	private Address address;
+	private String fname, lname, address, city, state, phone,zip;
 
-	public Person(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+    public Person(String fname, String lname, String address, String city, String state, String phone, String zip)
+    {
+        this.fname = fname;
+        this.lname = lname;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.phone = phone;
+        this.zip = zip;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    public String getFname()
+    {
+        return fname;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setFname(String fname)
+    {
+        this.fname = fname;
+    }
 
-	public void setName(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+    public String getLname()
+    {
+        return lname;
+    }
 
-	@Override
-	public String toString() {
-		return String.format(this.getFullName() + ", " + this.phoneNumber + ", " + this.address.getAddress());
-	}
+    public void setLname(String lname)
+    {
+        this.lname = lname;
+    }
 
-	public String getPersonDetails() {
-		return this.toString();
-	}
+    public String getAddress()
+    {
+        return address;
+    }
 
-	public String getFullName() {
-		return String.format(this.firstName + " " + this.lastName);
-	}
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
 
-	public String firstName() {
-		return this.firstName;
-	}
+    public String getCity()
+    {
+        return city;
+    }
 
-	public String lastName() {
-		return this.lastName;
-	}
+    public void setCity(String city)
+    {
+        this.city = city;
+    }
 
+    public String getState()
+    {
+        return state;
+    }
+
+    public void setState(String state)
+    {
+        this.state = state;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public String getZip()
+    {
+        return zip;
+    }
+
+    public void setZip(String zip)
+    {
+        this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", phone='" + phone + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
+    }
 }
+
