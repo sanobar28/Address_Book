@@ -14,6 +14,7 @@ import com.bridgelabz.JavaPractice.Util.InputUtil;
 
 public class AddressBook {
 
+	//main
 	public static void main(String[] args) {
 		
 		int choice, i = 0;
@@ -25,7 +26,8 @@ public class AddressBook {
 			System.out.println("2: Display Records     ");
 			System.out.println("3: Edit Person     ");
 			System.out.println("4: Delete Person     ");
-			System.out.println("5: Exit		       \n");
+			System.out.println("5: Search Record   ");
+			System.out.println("6: Exit		       \n");
 			System.out.println("--- Enter Your Choice ---");
 
 			choice = InputUtil.getIntValue();
@@ -43,6 +45,9 @@ public class AddressBook {
 				help.deleteRecord();
 				break;
 			case 5:
+				help.searchInRecords();
+				break;
+			case 6:
 				i = 1;
 				break;
 			default:

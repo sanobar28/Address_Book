@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.bridgelabz.JavaPractice.Util.InputUtil;
+import com.bridgelabz.JavaPractice.service.Search;
 
 import java.util.HashMap;
 import java.util.List;
@@ -130,8 +131,8 @@ public class Helper {
 	}
 
 	/**
-	 * UC-7 Check if Person record already exist
-	 * by using equals
+	 * UC-7 Check if Person record already exist by using equals
+	 * 
 	 * @param fname
 	 * @return
 	 */
@@ -147,6 +148,32 @@ public class Helper {
 			return true;
 		}
 		return false;
+	}
+
+	
+	/**
+	 * UC-8 Search person record by person city or person state
+	 * 
+	 */
+	public void searchInRecords() {
+		int i = 0;
+		while (i == 0) {
+			System.out.println("1. Search By City\n" + "2. Search By State\n" + "3. Back\n" + "Choose Your Option");
+			int choice = InputUtil.getIntValue();
+			switch (choice) {
+			case 1:
+				Search.searchByCity(PERSON);
+				break;
+			case 2:
+				Search.searchByState(PERSON);
+				break;
+			case 3:
+				i = 1;
+				break;
+			default:
+				System.out.println("Please Enter Correct Option...");
+			}
+		}
 	}
 
 }
