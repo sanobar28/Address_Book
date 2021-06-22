@@ -152,7 +152,7 @@ public class Helper {
 
 	
 	/**
-	 * UC-8 Search person record by person city or person state
+	 * UC-9 View person records by person city or person state
 	 * 
 	 */
 	public void searchInRecords() {
