@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.bridgelabz.JavaPractice.Util.InputUtil;
 import com.bridgelabz.JavaPractice.service.Search;
+import com.bridgelabz.JavaPractice.service.Sort;
 
 import java.util.HashMap;
 import java.util.List;
@@ -150,7 +151,6 @@ public class Helper {
 		return false;
 	}
 
-	
 	/**
 	 * UC-9 View person records by person city or person state
 	 * 
@@ -173,6 +173,22 @@ public class Helper {
 			default:
 				System.out.println("Please Enter Correct Option...");
 			}
+		}
+	}
+
+	/**
+	 * UC-11 This Method will Sort the Address book by Name
+	 */
+	public void sortRecords() {
+		System.out
+				.println("Sort By...\n" + "1: First Name\n" + "5: Back");
+		int choice = InputUtil.getIntValue();
+		switch (choice) {
+		case 1:
+			Sort.sortByName(PERSON);
+			break;
+		default:
+			System.out.println("Please Enter Valid Option...");
 		}
 	}
 
