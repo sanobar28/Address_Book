@@ -11,14 +11,16 @@
 package com.bridgelabz.JavaPractice;
 
 import com.bridgelabz.JavaPractice.Util.InputUtil;
+import com.bridgelabz.JavaPractice.exception.AddressBookException;
+import com.bridgelabz.JavaPractice.service.AddressBookService;
 
 public class AddressBook {
 
 	//main
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AddressBookException {
 		
 		int choice, i = 0;
-		final Helper help = new Helper();
+		final AddressBookService  help = new AddressBookService ();
 		while (i == 0) {
 			System.out.println("--- Address Book Management ---\n");
 			System.out.println("\t--MENU--");
