@@ -28,6 +28,10 @@ public class SearchSortOperations {
 	        firstName = lastName = address = city = state = phone = zip = null;
 	    }
 
+	    /**
+	     * sort operations on database
+	     * @throws SQLException
+	     */
 	    public void sortRecords() throws SQLException {
 	        int choice = userInputs.sortMenu();
 	        String sortQuery = "";
@@ -57,6 +61,10 @@ public class SearchSortOperations {
 	        }
 	    }
 
+	    /**
+	     * Search operations on Database 
+	     * @throws SQLException
+	     */
 	    public void searchInRecords() throws SQLException {
 	        int flag = 0;
 	        try (Connection con = DBconnection.getConnection()) {
@@ -82,6 +90,13 @@ public class SearchSortOperations {
 	        }
 	    }
 
+	    /**
+	     * Method to get data from database and store in person list
+	     * @param con
+	     * @param sortQuery
+	     * @return
+	     * @throws SQLException
+	     */
 	    private List<Person> getDataOnQuery(Connection con, String sortQuery) throws SQLException {
 	        List<Person> personData = new ArrayList<>();
 	        statement = con.prepareStatement(sortQuery);
