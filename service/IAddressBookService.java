@@ -1,20 +1,18 @@
 package com.bridgelabz.JavaPractice.service;
 
+import java.util.List;
+
+import com.bridgelabz.JavaPractice.Person;
 import com.bridgelabz.JavaPractice.exception.AddressBookException;
 
 public interface IAddressBookService {
 
-	void addRecord();
 
-	void editRecord() throws AddressBookException;
+    List<Person> addRecord(List<Person> personList, Person person);
 
-	void displayRecord();
+    List<Person> editRecord(List<Person> person) throws AddressBookException;
 
-	void deleteRecord() throws AddressBookException;
+    void displayRecord(List<Person> person);
 
-	void sortRecords();
-
-	void searchInRecords();
-
-	boolean checkExists(String firstName);
+    List<Person> deleteRecord(List<Person> personList, int id) throws AddressBookException;
 }
