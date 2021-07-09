@@ -18,7 +18,11 @@ public class DatabaseOperations {
 	UserInput userInputs = new UserInput();
 	List<Person> personList = new ArrayList<>();
 	private String firstName, lastName, address, city, state, phone, zip;
-
+	
+	
+	/**
+	 * Method to add record to database
+	 */
 	public void addRecordToDB() {
 
 		String insertQuery = "INSERT INTO address_book(first_name,last_name,address,city,state,phone_number,zip)"
@@ -46,6 +50,10 @@ public class DatabaseOperations {
 		System.out.println("Person Data Inserted Successfully");
 	}
 
+	/**
+	 * Method to get data from database and store in person list
+	 * @return
+	 */
 	public List<Person> getDataFromDB() {
 		String getQuery = "SELECT * FROM address_book";
 		try (Connection con = DBconnection.getConnection()) {
@@ -67,6 +75,10 @@ public class DatabaseOperations {
 		return personList;
 	}
 
+	/**
+	 * Method to edit person data in database
+	 * @throws SQLException
+	 */
 	public void editPersonDetails() throws SQLException {
 		String[] name = userInputs.getName();
 		int flag = 0;
@@ -104,6 +116,15 @@ public class DatabaseOperations {
 		}
 	}
 
+	/**
+	 * Method to update field in database using update query
+	 * @param con
+	 * @param firstName
+	 * @param lastName
+	 * @param fieldName
+	 * @param newValue
+	 * @throws SQLException
+	 */
 	private void updateField(Connection con, String firstName, String lastName, String fieldName, String newValue)
 			throws SQLException {
 		String updateQuery = "UPDATE address_book SET " + fieldName + " = '" + newValue + "' WHERE first_name = '"
@@ -114,6 +135,9 @@ public class DatabaseOperations {
 		System.out.println("Address Updated Successfully...");
 	}
 
+	/**
+	 * Delete record from database where first name and last name given
+	 */
 	public void deleteRecord() {
 		String[] name = userInputs.getName();
 		String deleteQuery = "DELETE FROM address_book Where first_name = '" + name[0] + "' AND last_name = '" + name[1]
